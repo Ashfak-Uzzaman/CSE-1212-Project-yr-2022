@@ -7,7 +7,7 @@ struct time
     int d, mo, y;
     char a[3];
 
-} st,tmr;
+} st, tmr;
 //////////LEAP YEAR/////////////
 int ly(int year)
 {
@@ -115,30 +115,26 @@ void clock()
             {
                 clk.mo++;
             }
-            if(clk.mo==13)
+            if (clk.mo == 13)
             {
-                clk.mo=1;
-
-
+                clk.mo = 1;
             }
             if (clk.mo == 1 && clk.d == 1)
             {
                 clk.y++;
             }
-
-
         }
 
         sleep(1);
 
         system("cls");
 
-        printf("\t\t\t\t\t%cDigital Clock%c\n\n",4,4);
+        printf("\t\t\t\t\t%cDigital Clock%c\n\n", 4, 4);
 
         printf("\t\t\t\t\t--------------\n");
         printf("\t\t\t\t\t|%.2d : %.2d : %.2d|\n", clk.h, clk.m, clk.s);
         printf("\t\t\t\t\t--------------\n\n");
-        printf("\t\t\t\t\t    Date\n",4,4);
+        printf("\t\t\t\t\t    Date\n", 4, 4);
         printf("\t\t\t\t\t--------------\n");
         printf("\t\t\t\t        %.2d - %.2d - %d\n", clk.d, clk.mo, clk.y);
         printf("\t\t\t\t\t--------------\n");
@@ -209,60 +205,55 @@ void stw()
 
 ///////////////   TIMER  ///////////////////////
 
-
-
-
-void timerf( )
+void timerf()
 {
-    if(tmr.m>59 || tmr.s>59)
-          {system("cls");
-              printf("\n\t\t\t\t\tInvalid Time!!!");
+    if (tmr.m > 59 || tmr.s > 59)
+    {
+        system("cls");
+        printf("\n\t\t\t\t\tInvalid Time!!!");
 
-          printf("\n\n\t\t\t\t    Press any key to continue\n\n\n");
-          }
+        printf("\n\n\t\t\t\t    Press any key to continue\n\n\n");
+    }
 
+    while ((!_kbhit()) && (tmr.s < 60 && tmr.m < 60))
 
-        while ((!_kbhit()) && (tmr.s<60 && tmr.m<60))
-
+    {
+        system("cls");
+        printf("\n\n\t\t\t\t\t\t%.2d : %.2d : %.2d\n", tmr.h, tmr.m, tmr.s);
+        printf("\n\t\t\t\t\t  Press any key to stop\n");
+        if (tmr.h == 0 && tmr.m == 0 && tmr.s == 0)
         {
             system("cls");
             printf("\n\n\t\t\t\t\t\t%.2d : %.2d : %.2d\n", tmr.h, tmr.m, tmr.s);
-            printf("\n\t\t\t\t\t  Press any key to stop\n");
-            if (tmr.h == 0 && tmr.m == 0 && tmr.s == 0)
-            { system("cls");
-                printf("\n\n\t\t\t\t\t\t%.2d : %.2d : %.2d\n", tmr.h, tmr.m, tmr.s);
-                printf("\n\t\t\t\t\tTimes up!! Timer has stopped.\n");
-                sleep(3);
-                system("cls");
-                printf("\n\n\t\t\t\t\t\tPress any key\n");
+            printf("\n\t\t\t\t\tTimes up!! Timer has stopped.\n");
+            sleep(3);
+            system("cls");
+            printf("\n\n\t\t\t\t\t\tPress any key\n");
 
-                return;
-            }
-            if (tmr.s != 0)
-            {
-                tmr.s--;
-            }
-            if (tmr.m != 0 && tmr.s == 0)
-            {
-                tmr.s = 59;
-                tmr.m--;
-            }
+            return;
+        }
+        if (tmr.s != 0)
+        {
+            tmr.s--;
+        }
+        if (tmr.m != 0 && tmr.s == 0)
+        {
+            tmr.s = 59;
+            tmr.m--;
+        }
 
-            if (tmr.h != 0 && tmr.m == 0 && tmr.s == 0)
-            {
-                tmr.h--;
-                tmr.m = 59;
-                tmr.s = 59;
-            }
+        if (tmr.h != 0 && tmr.m == 0 && tmr.s == 0)
+        {
+            tmr.h--;
+            tmr.m = 59;
+            tmr.s = 59;
+        }
 
+        sleep(1);
+    }
 
-            sleep(1);
-
+    return;
 }
-
-        return;
-}
-
 
 void timer()
 {
@@ -274,54 +265,50 @@ void timer()
     system("cls");
     timerf();
 
-
-    while(1){
-            char a;
-               getch();
-          system("cls");
-          if((tmr.h==0 && tmr.m==0 && tmr.s==0))
-          {
-              printf("\n\n\t\t\t\t1. Set Time & Start\t2. End\n");
-              a=getch();
-              a=a+1;
-
-          }
-          else if(tmr.m>59 || tmr.s>59)
-          {printf("Invalid Time!!!\n\n\n");
-          system("cls");
-              printf("\n\n\t\t\t\t1. Set Time & Start\t2. End\n");
-              a=getch();
-              a=a+1;
-
-          }
-          else
-          {
-              printf("\n\n\t\t\t\t\t\t%.2d : %.2d : %.2d\n\n", tmr.h, tmr.m, tmr.s);
-    printf("\t\t\t\t1. Start\t2. Set Time & Start\t3. End\n");
-    a=getch();
-          }
-
-
-
-    switch (a)
+    while (1)
     {
-    case '1':
-        timerf();
-        break;
-
-    case '2':
+        char a;
+        getch();
         system("cls");
+        if ((tmr.h == 0 && tmr.m == 0 && tmr.s == 0))
+        {
+            printf("\n\n\t\t\t\t1. Set Time & Start\t2. End\n");
+            a = getch();
+            a = a + 1;
+        }
+        else if (tmr.m > 59 || tmr.s > 59)
+        {
+            printf("Invalid Time!!!\n\n\n");
+            system("cls");
+            printf("\n\n\t\t\t\t1. Set Time & Start\t2. End\n");
+            a = getch();
+            a = a + 1;
+        }
+        else
+        {
+            printf("\n\n\t\t\t\t\t\t%.2d : %.2d : %.2d\n\n", tmr.h, tmr.m, tmr.s);
+            printf("\t\t\t\t1. Start\t2. Set Time & Start\t3. End\n");
+            a = getch();
+        }
 
-    printf("\n\t\t\t\t\tPlease set timer (hh mm ss) :");
-    scanf("%d %d %d", &tmr.h, &tmr.m, &tmr.s);
-        timerf();
-        break; // st.h,st.m,st.s
+        switch (a)
+        {
+        case '1':
+            timerf();
+            break;
 
-    case '3':
-        return ;
+        case '2':
+            system("cls");
+
+            printf("\n\t\t\t\t\tPlease set timer (hh mm ss) :");
+            scanf("%d %d %d", &tmr.h, &tmr.m, &tmr.s);
+            timerf();
+            break; // st.h,st.m,st.s
+
+        case '3':
+            return;
+        }
     }
-    }
-
 }
 ///////////////  TIMER END /////////////////////
 
@@ -353,14 +340,14 @@ void pomodoro()
                 t.s = 59;
                 t.m--;
             }
-            sleep(1);  /************************/
+            sleep(1); /************************/
         }
 
         t.m = 5, t.s = 0;
         while (!_kbhit() && i < 3)
         {
             system("cls");
-            printf("\t\t\t\t\t\tShort Break- %d\n\n", i+1);
+            printf("\t\t\t\t\t\tShort Break- %d\n\n", i + 1);
             printf("\t\t\t\t\t\t   %.2d : %.2d\n", t.m, t.s);
             printf("\n\t\t\t\t\tPress Anykey to Dismiss\n\n\n");
 
@@ -378,7 +365,6 @@ void pomodoro()
                 t.s = 59;
                 t.m--;
             }
-
         }
         i++;
     }
@@ -395,9 +381,8 @@ void pomodoro()
 /////////First Day//////////////////
 int firstday(int y)
 {
-    int day=(y*365+((y-1)/4)-((y-1)/100)+((y-1)/400))%7;
+    int day = (y * 365 + ((y - 1) / 4) - ((y - 1) / 100) + ((y - 1) / 400)) % 7;
     return day;
-
 }
 ////////First Day End////////////
 
@@ -407,46 +392,45 @@ void calender()
     int z;
     while (1)
     {
-        char mon[ ] [15] = {"January","February","March","April","May","June","July","August","September","October","November","December"};
-        int days_in_mon[]= {31,28,31,30,31,30,31,31,30,31,30,31};
+        char mon[][15] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        int days_in_mon[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         int year;
         system("cls");
         printf("\t\t\tEnter Year: ");
-        scanf("%d",&year);
+        scanf("%d", &year);
         system("cls");
-        printf("\n\n**************  Welcome to Year %d  ***************\n\n\n",year);
-        int weekday=firstday(year);
-        if(ly(year)==1)
+        printf("\n\n**************  Welcome to Year %d  ***************\n\n\n", year);
+        int weekday = firstday(year);
+        if (ly(year) == 1)
         {
-            days_in_mon[1]=29;
+            days_in_mon[1] = 29;
         }
-        for(int i=0; i<12; i++)
+        for (int i = 0; i < 12; i++)
         {
-            printf("\n\n\n----------------------%s-------------------------\n",mon[i]);
+            printf("\n\n\n----------------------%s-------------------------\n", mon[i]);
             printf("\n    Sun    Mon    Tue    Wed    Thu    Fri    Sat\n");
-            for(int k=0; k<weekday; k++)
+            for (int k = 0; k < weekday; k++)
             {
                 printf("       ");
             }
-            for(int j=1; j<=days_in_mon[i]; j++)
+            for (int j = 1; j <= days_in_mon[i]; j++)
             {
-                if(weekday==7)
+                if (weekday == 7)
                 {
-                    weekday=0;
+                    weekday = 0;
                     printf("\n");
                 }
-                printf("%7d",j);
+                printf("%7d", j);
                 weekday++;
             }
         }
 
         printf("\n\n\nDo You Want to continue? \n1. Yes\n2. No\n\n");
-        scanf("%d",&z);
-        if(z==2)
+        scanf("%d", &z);
+        if (z == 2)
         {
             break;
         }
-
     }
 }
 
@@ -457,16 +441,16 @@ int main()
     system("cls");
     printf("\n\n\n\n\n\t\t\t\t\t***************************");
     printf("\n\t\t\t\t\t***************************");
-    printf("\n\t\t\t\t\t%c WELCOME TO CLOCK STUDIO %c",4,4);
+    printf("\n\t\t\t\t\t%c WELCOME TO CLOCK STUDIO %c", 4, 4);
     printf("\n\t\t\t\t\t***************************");
-        printf("\n\t\t\t\t\t***************************\n\n\n\n\n\n\n");
+    printf("\n\t\t\t\t\t***************************\n\n\n\n\n\n\n");
 
     sleep(2);
     system("cls");
-    int z=1;
+    int z = 1;
     while (z)
     {
-        printf("\t\t\t\t\t  %c Clock Studio \%c\n\n",4,4);
+        printf("\t\t\t\t\t  %c Clock Studio \%c\n\n", 4, 4);
         printf("\t\t\t\t\t1. Digital Date & Clock\n\t\t\t\t\t2. Stopwatch\n");
         printf("\t\t\t\t\t3. Timer\n\t\t\t\t\t4. Pomodoro Timer\n\t\t\t\t\t5. Calender\n\t\t\t\t\t6. End\n\t\t\t\t\t\n\n");
         printf("\t\t\t\t\tPlease Choose Any Feature: ");
@@ -496,11 +480,9 @@ int main()
             sleep(1);
             system("cls");
             return 0;
-
         }
 
         system("cls");
-
     }
     return 0;
 }
